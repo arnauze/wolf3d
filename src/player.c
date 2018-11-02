@@ -54,7 +54,7 @@ void	change_pos(t_vector *p, t_variables *data, int key)
 		if (data->map.map[(int)floor(p->y + data->player.direction.y * MOVE_SPEED)][(int)floor(p->x)] == '0')
 			p->y += data->player.direction.y * MOVE_SPEED;
 	}
-	else if (key == KEY_S || key == KEY_DOWN)
+	if (key == KEY_S || key == KEY_DOWN)
 	{
 		if (data->map.map[(int)floor(p->y)][(int)floor(p->x - data->player.direction.x * MOVE_SPEED)] == '0')
 			p->x -= data->player.direction.x * MOVE_SPEED;
@@ -62,19 +62,18 @@ void	change_pos(t_vector *p, t_variables *data, int key)
 			p->y -= data->player.direction.y * MOVE_SPEED;
 
 	}
-	else if (key == KEY_A)
+	if (key == KEY_A)
 	{
 		if (data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.y * MOVE_SPEED)] == '0')
 			p->x += data->player.direction.y * MOVE_SPEED;
 		if (data->map.map[(int)floor(p->y - data->player.direction.x * MOVE_SPEED)][(int)floor(p->x)] == '0')
 			p->y -= data->player.direction.x * MOVE_SPEED;
 	}
-	else
+	if (key == KEY_D)
 	{
 		if (data->map.map[(int)floor(p->y)][(int)floor(p->x - data->player.direction.y * MOVE_SPEED)] == '0')
 			p->x -= data->player.direction.y * MOVE_SPEED;
 		if (data->map.map[(int)floor(p->y + data->player.direction.x * MOVE_SPEED)][(int)floor(p->x)] == '0')
 			p->y += data->player.direction.x * MOVE_SPEED;
 	}
-	ALGORITHM(data);
 }

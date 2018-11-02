@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/02 03:57:59 by amagnan           #+#    #+#             */
+/*   Updated: 2018/11/02 03:58:01 by amagnan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-#include "../libft/libft.h"
-#include <math.h>
-#include "../mlx/mlx.h"
-#include <stdio.h>
+# include "../libft/libft.h"
+# include <math.h>
+# include "../mlx/mlx.h"
+# include <stdio.h>
 
-typedef struct 				s_color
+typedef struct				s_color
 {
-	int						B;
-	int						G;
-	int						R;
-	int						A;
+	int						b;
+	int						g;
+	int						r;
+	int						a;
 }							t_color;
 
-typedef	struct 				s_vector
+typedef	struct				s_vector
 {
 	double					x;
 	double					y;
 }							t_vector;
 
-typedef	struct 				s_ray
+typedef	struct				s_ray
 {
 	double					x;
 	double					y;
@@ -31,21 +43,21 @@ typedef	struct 				s_ray
 	t_vector				step;
 }							t_ray;
 
-typedef	struct 				s_player
+typedef	struct				s_player
 {
 	t_vector				position;
 	t_vector				direction;
 	t_vector				projection_plane;
 }							t_player;
 
-typedef	struct 				s_map
+typedef	struct				s_map
 {
 	char					**map;
 	int						x;
 	int						y;
 }							t_map;
 
-typedef	struct 				s_mlx
+typedef	struct				s_mlx
 {
 	void					*mlx;
 	void					*image;
@@ -56,7 +68,7 @@ typedef	struct 				s_mlx
 	int						trash_c;
 }							t_mlx;
 
-typedef	struct 				s_variables
+typedef	struct				s_variables
 {
 	t_ray					ray;
 	t_player				player;
@@ -66,17 +78,17 @@ typedef	struct 				s_variables
 	double					distance;
 }							t_variables;
 
-#define MAX_X 				1280.0
-#define MAX_Y 				780.0
-#define BLOCK_SIZE 			64
-#define WALL_HEIGHT 		64
-#define DISTANCE_PLANE 		1108
+# define MAX_X 				1280.0
+# define MAX_Y 				780.0
+# define BLOCK_SIZE 		64
+# define WALL_HEIGHT 		64
+# define DISTANCE_PLANE 	1108
 
 # define ANGLE 				60.0 * M_PI/180.0
 # define ANG 				ANGLE / MAX_X
 # define EYE_H 				32
-# define ROT_SPEED 			5.0 / 180.0 * M_PI
-# define MOVE_SPEED 		0.5
+# define ROT_SPEED 			4.0 / 180.0 * M_PI
+# define MOVE_SPEED 		0.1
 
 # define KEY_ESCAPE			53
 # define KEY_W				13
@@ -92,7 +104,7 @@ typedef	struct 				s_variables
 # define KEY_UP				126
 # define KEY_DEL			117
 
-void 						put_pixel(unsigned char *pixel, t_color color);
+void						put_pixel(unsigned char *pixel, t_color color);
 void						put_column(unsigned char *pixel, int x, double size, t_color color);
 int							keyboard(int key, void *param);
 void						start_modelization(t_variables *data);
@@ -101,8 +113,9 @@ t_map						get_map(char *path);
 void						init_player(t_variables *data);
 void						angle(t_vector *d, t_vector *pp, int key);
 void						change_pos(t_vector *p, t_variables *data, int key);
-void 						ALGORITHM(t_variables *data);
-void   						new_frame(unsigned char *pixels, int size);
-
+void						algorithm(t_variables *data);
+void						new_frame(unsigned char *pixels, int size);
+t_color						set_color(char *str);
+t_color						get_color(t_variables *data);
 
 #endif

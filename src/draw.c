@@ -15,7 +15,7 @@
 void		new_frame(unsigned char *pixels, int size)
 {
 	int 	i;
-	
+
 	i = 0;
 	while (i < size / 2)
 	{
@@ -37,10 +37,10 @@ void		new_frame(unsigned char *pixels, int size)
 
 void 		put_pixel(unsigned char *pixel, t_color color)
 {
-	pixel[0] = color.B;
-	pixel[1] = color.G;
-	pixel[2] = color.R;
-	pixel[3] = color.A;
+	pixel[0] = color.b;
+	pixel[1] = color.g;
+	pixel[2] = color.r;
+	pixel[3] = color.a;
 }
 
 void		put_column(unsigned char *pixel, int x, double size, t_color color)

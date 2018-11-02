@@ -37,7 +37,7 @@ int		keyboard(int key, void *param)
     //     jump(d);
 	// ft_draw(d)
 	mlx_clear_window(d->mlx.mlx, d->mlx.window);;
-	ALGORITHM(d);
+	algorithm(d);
 	return (0);
 }
 
@@ -47,7 +47,7 @@ void		start_modelization(t_variables *data)
 	data->mlx.window = mlx_new_window(data->mlx.mlx, MAX_X, MAX_Y, "Wolf3D");
 	data->mlx.image = mlx_new_image(data->mlx.mlx, MAX_X, MAX_Y);
 	data->mlx.pixel = (unsigned char*)mlx_get_data_addr(data->mlx.image, &data->mlx.trash_a, &data->mlx.trash_b, &data->mlx.trash_c);
-	ALGORITHM(data);
+	algorithm(data);
 	mlx_hook(data->mlx.window, 2, 3, keyboard, data);
 	mlx_loop(data->mlx.mlx);
 	// ALGORITHM(data);
