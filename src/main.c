@@ -49,6 +49,7 @@ void		start_modelization(t_variables *data)
 	data->mlx.pixel = (unsigned char*)mlx_get_data_addr(data->mlx.image, &data->mlx.trash_a, &data->mlx.trash_b, &data->mlx.trash_c);
 	ALGORITHM(data);
 	mlx_hook(data->mlx.window, 2, 3, keyboard, data);
+	mlx_loop(data->mlx.mlx);
 	// ALGORITHM(data);
 }
 
@@ -56,7 +57,6 @@ void		wolf_this_shit(t_variables *data)
 {
 	init_player(data);
 	start_modelization(data);
-	mlx_loop(data->mlx.mlx);
 }
 
 int 		main(int argc, char **argv)

@@ -12,6 +12,29 @@
 
 #include "../header/wolf3d.h"
 
+void		new_frame(unsigned char *pixels, int size)
+{
+	int 	i;
+	
+	i = 0;
+	while (i < size / 2)
+	{
+		pixels[i] = 255;
+        pixels[i + 1] = 204;
+		pixels[i + 2] = 153;
+		pixels[i + 3] = 0;
+		i += 4;
+	}
+	while (i < size)
+	{
+		pixels[i] = 205;
+		pixels[i + 1] = 229;
+		pixels[i + 2] = 252;
+		pixels[i + 3] = 0;
+		i += 4;
+	}
+}
+
 void 		put_pixel(unsigned char *pixel, t_color color)
 {
 	pixel[0] = color.B;

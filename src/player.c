@@ -48,12 +48,7 @@ void	angle(t_vector *d, t_vector *pp, int key)
 void	change_pos(t_vector *p, t_variables *data, int key)
 {
 	if (key == KEY_W || key == KEY_UP)
-	{
-		printf("Position x: %f\n", p->x);
-		printf("Position y: %f\n", p->y);
-		printf("Direction x: %f\n", data->player.direction.x);
-		printf("Direction y: %f\n", data->player.direction.y);
-		printf("%c\n", data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.x * MOVE_SPEED)]);
+	{		
 		if (data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.x * MOVE_SPEED)] == '0')
 			p->x += data->player.direction.x * MOVE_SPEED;
 		if (data->map.map[(int)floor(p->y + data->player.direction.y * MOVE_SPEED)][(int)floor(p->x)] == '0')
@@ -69,16 +64,17 @@ void	change_pos(t_vector *p, t_variables *data, int key)
 	}
 	else if (key == KEY_A)
 	{
-		if (data->map.map[(int)floor(p->y)][(int)floor(p->x - data->player.direction.x * MOVE_SPEED)] == '0')
-			p->x -= data->player.direction.x * MOVE_SPEED;
-		if (data->map.map[(int)floor(p->y + data->player.direction.y * MOVE_SPEED)][(int)floor(p->x)] == '0')
-			p->y += data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.y * MOVE_SPEED)] == '0')
+			p->x += data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(p->y - data->player.direction.x * MOVE_SPEED)][(int)floor(p->x)] == '0')
+			p->y -= data->player.direction.x * MOVE_SPEED;
 	}
 	else
 	{
-		if (data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.x * MOVE_SPEED)] == '0')
-			p->x += data->player.direction.x * MOVE_SPEED;
-		if (data->map.map[(int)floor(p->y - data->player.direction.y * MOVE_SPEED)][(int)floor(p->x)] == '0')
-			p->y -= data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(p->y)][(int)floor(p->x - data->player.direction.y * MOVE_SPEED)] == '0')
+			p->x -= data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(p->y + data->player.direction.x * MOVE_SPEED)][(int)floor(p->x)] == '0')
+			p->y += data->player.direction.x * MOVE_SPEED;
 	}
+	ALGORITHM(data);
 }

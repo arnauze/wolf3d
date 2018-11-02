@@ -29,28 +29,28 @@ void ALGORITHM(t_variables *data)
 	double	line_height;
 	t_color	color;
 
-	color.B = 255;
+	color.B = 146;
 	color.A = 0;
-	color.G = 255;
-	color.R = 255;
-	ft_bzero(data->mlx.pixel, 5120 * MAX_Y);
+	color.G = 145;
+	color.R = 131;
+	new_frame(data->mlx.pixel, 5120 * MAX_Y);
 	while (x < 5120)
 	{
 		hit = 0;
 		// Initialize variables
-		data->camera = 2 * (x / 4) / MAX_X - 1; // To calculate the angle
+		data->camera = 2.0 * (x / 4.0) / MAX_X - 1.0; // To calculate the angle
 		data->ray.x = data->player.direction.x + data->player.projection_plane.x * data->camera;
 		data->ray.y = data->player.direction.y + data->player.projection_plane.y * data->camera;
 
-		data->ray.map.x = data->player.position.x;
-		data->ray.map.y = data->player.position.y;
-		data->ray.delta_dist.x = sqrt((data->ray.y * data->ray.y) / (data->ray.x * data->ray.x) + 1);//fabs(1 / data->ray.x);
-		data->ray.delta_dist.y = sqrt((data->ray.x * data->ray.x) / (data->ray.y * data->ray.y) + 1);//fabs(1 / data->ray.y);
+		data->ray.map.x = floor(data->player.position.x);
+		data->ray.map.y = floor(data->player.position.y);
+		data->ray.delta_dist.x = sqrt((data->ray.y * data->ray.y) / (data->ray.x * data->ray.x) + 1.0);//fabs(1 / data->ray.x);
+		data->ray.delta_dist.y = sqrt((data->ray.x * data->ray.x) / (data->ray.y * data->ray.y) + 1.0);//fabs(1 / data->ray.y);
 		// Calculate step and initial sideDist
 		data->ray.step.x = (data->ray.x < 0 ? -1 : 1);
 		data->ray.step.y = (data->ray.y < 0 ? -1 : 1);
-		data->ray.dist_side.x = (data->ray.x < 0 ? data->player.position.x - data->ray.map.x : data->ray.map.x + 1 - data->player.position.x) * data->ray.delta_dist.x;
-		data->ray.dist_side.y = (data->ray.y < 0 ? data->player.position.y - data->ray.map.y : data->ray.map.y + 1 - data->player.position.y) * data->ray.delta_dist.y;
+		data->ray.dist_side.x = (data->ray.x < 0 ? data->player.position.x - data->ray.map.x : data->ray.map.x + 1.0 - data->player.position.x) * data->ray.delta_dist.x;
+		data->ray.dist_side.y = (data->ray.y < 0 ? data->player.position.y - data->ray.map.y : data->ray.map.y + 1.0 - data->player.position.y) * data->ray.delta_dist.y;
 		// Perform DDA / Find the closest wall by casting the rays
 		while (hit == 0)
 		{
@@ -73,7 +73,7 @@ void ALGORITHM(t_variables *data)
 				hit = 1;
 		}
 		// Calculate the distance projected on the projection plane
-		data->distance = (data->ray.side ? (data->ray.map.y - data->player.position.y + (1 - data->ray.step.y) / 2) / data->ray.y : (data->ray.map.x - data->player.position.x + (1 - data->ray.step.x) / 2) / data->ray.x);
+		data->distance = (data->ray.side ? (data->ray.map.y - data->player.position.y + (1.0 - data->ray.step.y) / 2.0) / data->ray.y : (data->ray.map.x - data->player.position.x + (1.0 - data->ray.step.x) / 2.0) / data->ray.x);
 		// Calculate line_height on projection plane
 		line_height = MAX_Y / data->distance;
 		if (line_height > 780)
@@ -83,6 +83,5 @@ void ALGORITHM(t_variables *data)
 		put_column(data->mlx.pixel, x, line_height, color);
 		x += 4;
 	}
-	printf("Line height: %f\n", line_height);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.window, data->mlx.image, 0, 0);
 }
