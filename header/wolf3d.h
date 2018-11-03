@@ -16,7 +16,6 @@
 # include "../libft/libft.h"
 # include <math.h>
 # include "../mlx/mlx.h"
-# include <stdio.h>
 
 typedef struct				s_color
 {

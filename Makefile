@@ -5,7 +5,8 @@ SRC = libft/*.c\
 		src/draw.c\
 		src/map.c\
 		src/player.c\
-		src/raycasting.c
+		src/raycasting.c\
+		src/keys.c
 
 FLAGS = -Wall -Wextra -Werror 
 NAME = wolf3d.a

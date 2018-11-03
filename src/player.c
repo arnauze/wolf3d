@@ -22,29 +22,6 @@ void	init_player(t_variables *data)
 	data->player.projection_plane.y = 0.66;
 }
 
-// void	angle(t_vector *d, t_vector *pp, int key)
-// {
-// 	double	old_dir_x;
-// 	double	old_plane_x;
-
-// 	old_dir_x = data->player.direction.x;
-// 	old_plane_x = pp->x;
-// 	if (key == KEY_LEFT)
-// 	{
-// 		data->player.direction.x = data->player.direction.x * cos(-ROT_SPEED) - d->y * sin(-ROT_SPEED);
-// 		d->y = old_dir_x * sin(-ROT_SPEED) + d->y * cos(-ROT_SPEED);
-// 		pp->x = pp->x * cos(-ROT_SPEED) - pp->y * sin(-ROT_SPEED);
-// 		pp->y = old_plane_x * sin(-ROT_SPEED) + pp->y * cos(-ROT_SPEED);	
-// 	}
-// 	else
-// 	{
-// 		d->x = d->x * cos(ROT_SPEED) - d->y * sin(ROT_SPEED);
-// 		d->y = old_dir_x * sin(ROT_SPEED) + d->y * cos(ROT_SPEED);
-// 		pp->x = pp->x * cos(ROT_SPEED) - pp->y * sin(ROT_SPEED);
-// 		pp->y = old_plane_x * sin(ROT_SPEED) + pp->y * cos(ROT_SPEED);
-// 	}
-// }
-
 int		change_pos(t_variables *data)
 {
 	double	old_dir_x;
