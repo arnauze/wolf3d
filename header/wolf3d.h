@@ -68,12 +68,23 @@ typedef	struct				s_mlx
 	int						trash_c;
 }							t_mlx;
 
+typedef	struct 				s_move
+{
+	int 					up;
+	int 					down;
+	int 					left;
+	int 					right;
+	int 					rotate_right;
+	int 					rotate_left;
+}							t_move;
+
 typedef	struct				s_variables
 {
 	t_ray					ray;
 	t_player				player;
 	t_mlx					mlx;
 	t_map					map;
+	t_move					move;
 	double					camera;
 	double					distance;
 }							t_variables;
@@ -87,8 +98,8 @@ typedef	struct				s_variables
 # define ANGLE 				60.0 * M_PI/180.0
 # define ANG 				ANGLE / MAX_X
 # define EYE_H 				32
-# define ROT_SPEED 			4.0 / 180.0 * M_PI
-# define MOVE_SPEED 		0.1
+# define ROT_SPEED 			3.0 / 180.0 * M_PI
+# define MOVE_SPEED 		0.05
 
 # define KEY_ESCAPE			53
 # define KEY_W				13
@@ -105,17 +116,22 @@ typedef	struct				s_variables
 # define KEY_DEL			117
 
 void						put_pixel(unsigned char *pixel, t_color color);
-void						put_column(unsigned char *pixel, int x, double size, t_color color);
+void						put_column(t_variables **data, int x, double size, t_color color);
 int							keyboard(int key, void *param);
 void						start_modelization(t_variables *data);
 void						wolf_this_shit(t_variables *data);
 t_map						get_map(char *path);
 void						init_player(t_variables *data);
 void						angle(t_vector *d, t_vector *pp, int key);
-void						change_pos(t_vector *p, t_variables *data, int key);
+int							change_pos(t_variables *data);
 void						algorithm(t_variables *data);
 void						new_frame(unsigned char *pixels, int size);
 t_color						set_color(char *str);
 t_color						get_color(t_variables *data);
+void						dda(t_variables **data);
+void						init_variables(t_variables **data, int x);
+int 						key_release(int key, void *param);
+int 						key_press(int key, void *param);
+int 						key_exit(void);
 
 #endif

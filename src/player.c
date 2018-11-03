@@ -22,58 +22,79 @@ void	init_player(t_variables *data)
 	data->player.projection_plane.y = 0.66;
 }
 
-void	angle(t_vector *d, t_vector *pp, int key)
+// void	angle(t_vector *d, t_vector *pp, int key)
+// {
+// 	double	old_dir_x;
+// 	double	old_plane_x;
+
+// 	old_dir_x = data->player.direction.x;
+// 	old_plane_x = pp->x;
+// 	if (key == KEY_LEFT)
+// 	{
+// 		data->player.direction.x = data->player.direction.x * cos(-ROT_SPEED) - d->y * sin(-ROT_SPEED);
+// 		d->y = old_dir_x * sin(-ROT_SPEED) + d->y * cos(-ROT_SPEED);
+// 		pp->x = pp->x * cos(-ROT_SPEED) - pp->y * sin(-ROT_SPEED);
+// 		pp->y = old_plane_x * sin(-ROT_SPEED) + pp->y * cos(-ROT_SPEED);	
+// 	}
+// 	else
+// 	{
+// 		d->x = d->x * cos(ROT_SPEED) - d->y * sin(ROT_SPEED);
+// 		d->y = old_dir_x * sin(ROT_SPEED) + d->y * cos(ROT_SPEED);
+// 		pp->x = pp->x * cos(ROT_SPEED) - pp->y * sin(ROT_SPEED);
+// 		pp->y = old_plane_x * sin(ROT_SPEED) + pp->y * cos(ROT_SPEED);
+// 	}
+// }
+
+int		change_pos(t_variables *data)
 {
 	double	old_dir_x;
 	double	old_plane_x;
 
-	old_dir_x = d->x;
-	old_plane_x = pp->x;
-	if (key == KEY_LEFT)
-	{
-		d->x = d->x * cos(-ROT_SPEED) - d->y * sin(-ROT_SPEED);
-		d->y = old_dir_x * sin(-ROT_SPEED) + d->y * cos(-ROT_SPEED);
-		pp->x = pp->x * cos(-ROT_SPEED) - pp->y * sin(-ROT_SPEED);
-		pp->y = old_plane_x * sin(-ROT_SPEED) + pp->y * cos(-ROT_SPEED);	
-	}
-	else
-	{
-		d->x = d->x * cos(ROT_SPEED) - d->y * sin(ROT_SPEED);
-		d->y = old_dir_x * sin(ROT_SPEED) + d->y * cos(ROT_SPEED);
-		pp->x = pp->x * cos(ROT_SPEED) - pp->y * sin(ROT_SPEED);
-		pp->y = old_plane_x * sin(ROT_SPEED) + pp->y * cos(ROT_SPEED);
-	}
-}
-
-void	change_pos(t_vector *p, t_variables *data, int key)
-{
-	if (key == KEY_W || key == KEY_UP)
+	old_dir_x = data->player.direction.x;
+	old_plane_x = data->player.projection_plane.x;
+	if (data->move.up == 1)
 	{		
-		if (data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.x * MOVE_SPEED)] == '0')
-			p->x += data->player.direction.x * MOVE_SPEED;
-		if (data->map.map[(int)floor(p->y + data->player.direction.y * MOVE_SPEED)][(int)floor(p->x)] == '0')
-			p->y += data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y)][(int)floor(data->player.position.x + data->player.direction.x * MOVE_SPEED)] == '0')
+			data->player.position.x += data->player.direction.x * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y + data->player.direction.y * MOVE_SPEED)][(int)floor(data->player.position.x)] == '0')
+			data->player.position.y += data->player.direction.y * MOVE_SPEED;
 	}
-	if (key == KEY_S || key == KEY_DOWN)
+	else if (data->move.down == 1)
 	{
-		if (data->map.map[(int)floor(p->y)][(int)floor(p->x - data->player.direction.x * MOVE_SPEED)] == '0')
-			p->x -= data->player.direction.x * MOVE_SPEED;
-		if (data->map.map[(int)floor(p->y - data->player.direction.y * MOVE_SPEED)][(int)floor(p->x)] == '0')
-			p->y -= data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y)][(int)floor(data->player.position.x - data->player.direction.x * MOVE_SPEED)] == '0')
+			data->player.position.x -= data->player.direction.x * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y - data->player.direction.y * MOVE_SPEED)][(int)floor(data->player.position.x)] == '0')
+			data->player.position.y -= data->player.direction.y * MOVE_SPEED;
 
 	}
-	if (key == KEY_A)
+	if (data->move.left == 1)
 	{
-		if (data->map.map[(int)floor(p->y)][(int)floor(p->x + data->player.direction.y * MOVE_SPEED)] == '0')
-			p->x += data->player.direction.y * MOVE_SPEED;
-		if (data->map.map[(int)floor(p->y - data->player.direction.x * MOVE_SPEED)][(int)floor(p->x)] == '0')
-			p->y -= data->player.direction.x * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y)][(int)floor(data->player.position.x + data->player.direction.y * MOVE_SPEED)] == '0')
+			data->player.position.x += data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y - data->player.direction.x * MOVE_SPEED)][(int)floor(data->player.position.x)] == '0')
+			data->player.position.y -= data->player.direction.x * MOVE_SPEED;
 	}
-	if (key == KEY_D)
+	else if (data->move.right == 1)
 	{
-		if (data->map.map[(int)floor(p->y)][(int)floor(p->x - data->player.direction.y * MOVE_SPEED)] == '0')
-			p->x -= data->player.direction.y * MOVE_SPEED;
-		if (data->map.map[(int)floor(p->y + data->player.direction.x * MOVE_SPEED)][(int)floor(p->x)] == '0')
-			p->y += data->player.direction.x * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y)][(int)floor(data->player.position.x - data->player.direction.y * MOVE_SPEED)] == '0')
+			data->player.position.x -= data->player.direction.y * MOVE_SPEED;
+		if (data->map.map[(int)floor(data->player.position.y + data->player.direction.x * MOVE_SPEED)][(int)floor(data->player.position.x)] == '0')
+			data->player.position.y += data->player.direction.x * MOVE_SPEED;
 	}
+	if (data->move.rotate_left == 1)
+	{
+		data->player.direction.x = data->player.direction.x * cos(-ROT_SPEED) - data->player.direction.y * sin(-ROT_SPEED);
+		data->player.direction.y = old_dir_x * sin(-ROT_SPEED) + data->player.direction.y * cos(-ROT_SPEED);
+		data->player.projection_plane.x = data->player.projection_plane.x * cos(-ROT_SPEED) - data->player.projection_plane.y * sin(-ROT_SPEED);
+		data->player.projection_plane.y = old_plane_x * sin(-ROT_SPEED) + data->player.projection_plane.y * cos(-ROT_SPEED);	
+	}
+	else if (data->move.rotate_right == 1)
+	{
+		data->player.direction.x = data->player.direction.x * cos(ROT_SPEED) - data->player.direction.y * sin(ROT_SPEED);
+		data->player.direction.y  = old_dir_x * sin(ROT_SPEED) + data->player.direction.y * cos(ROT_SPEED);
+		data->player.projection_plane.x = data->player.projection_plane.x * cos(ROT_SPEED) - data->player.projection_plane.y * sin(ROT_SPEED);
+		data->player.projection_plane.y = old_plane_x * sin(ROT_SPEED) + data->player.projection_plane.y * cos(ROT_SPEED);
+	}
+	algorithm(data);
+	return (0);
 }
