@@ -6,7 +6,7 @@
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 16:00:24 by amagnan           #+#    #+#             */
-/*   Updated: 2018/11/01 16:00:25 by amagnan          ###   ########.fr       */
+/*   Updated: 2018/11/03 01:11:03 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		start_modelization(t_variables *data)
 	mlx_loop(data->mlx.mlx);
 }
 
-void		wolf_this_shit(t_variables *data)
+void		wolf(t_variables *data)
 {
 	init_player(data);
 	start_modelization(data);
@@ -42,7 +42,7 @@ int 		main(int argc, char **argv)
 	{
 		fd = open(argv[1], O_RDONLY);
 		data->map = get_map(argv[1]);
-		wolf_this_shit(data);
+		wolf(data);
 	}
 	return (0);
 }

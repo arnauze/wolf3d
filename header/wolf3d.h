@@ -6,7 +6,7 @@
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 03:57:59 by amagnan           #+#    #+#             */
-/*   Updated: 2018/11/02 03:58:01 by amagnan          ###   ########.fr       */
+/*   Updated: 2018/11/03 01:11:23 by amagnan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void						put_pixel(unsigned char *pixel, t_color color);
 void						put_column(t_variables **data, int x, double size, t_color color);
 int							keyboard(int key, void *param);
 void						start_modelization(t_variables *data);
-void						wolf_this_shit(t_variables *data);
+void						wolf(t_variables *data);
 t_map						get_map(char *path);
 void						init_player(t_variables *data);
 void						angle(t_vector *d, t_vector *pp, int key);
