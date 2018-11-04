@@ -12,11 +12,7 @@
 
 #include "../header/wolf3d.h"
 
-<<<<<<< HEAD
-int		dont_spawn_mid(t_map map)
-=======
 int			dont_spawn_mid(t_map map)
->>>>>>> 1d9aa9b6d05e73f4912929d04d96e588b443b342
 {
 	if (map.map[map.y / 2][map.x / 2] != '0')
 	{
@@ -25,7 +21,6 @@ int			dont_spawn_mid(t_map map)
 		exit(0);
 	}
 	return (1);
-<<<<<<< HEAD
 }
 
 void		check_middle(char **map, int count, int i)
@@ -72,8 +67,6 @@ int		check_error(char **map, int count, int x)
 	else
 		check_middle(map, count, i);
 	return (1);
-=======
->>>>>>> 1d9aa9b6d05e73f4912929d04d96e588b443b342
 }
 
 t_map		get_map(char *path, char *tmp)
@@ -97,14 +90,10 @@ t_map		get_map(char *path, char *tmp)
 		free(tmp);
 	}
 	map.map[count + 1] = NULL;
-<<<<<<< HEAD
-	if (!(check_error(map.map, count, 1)) || !(map.x = ft_strlen(map.map[0]))
-	|| !(map.y = count + 1) || !(dont_spawn_mid(map)) || (close(fd)) || (close(fd2)))
-=======
 	map.x = ft_strlen(map.map[0]);
 	map.y = count + 1;
-	if (!(dont_spawn_mid(map)) || (close(fd)) || (close(fd2)))
->>>>>>> 1d9aa9b6d05e73f4912929d04d96e588b443b342
+	if (!(check_error(map.map, count, 1)) || !(map.x = ft_strlen(map.map[0]))
+	|| !(map.y = count + 1) || !(dont_spawn_mid(map)) || (close(fd)) || (close(fd2)))
 		exit(0);
 	return (map);
 }
