@@ -6,7 +6,7 @@
 /*   By: amagnan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 15:54:17 by amagnan           #+#    #+#             */
-/*   Updated: 2018/11/01 15:54:19 by amagnan          ###   ########.fr       */
+/*   Updated: 2018/11/03 13:58:56 by feedme           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,14 @@ t_color		set_color(char *str)
 {
 	t_color	color;
 
-	if (ft_strcmp("RED", str) == 0)
-	{
-		color.b = 0;
-		color.g = 0;
+	if (!ft_strcmp("RED", str) && !(color.b = 0) && !(color.g = 0) && !(color.a = 0))
 		color.r = 255;
-		color.a = 0;
-	}
-	if (ft_strcmp("BLUE", str) == 0)
-	{
+	if (!ft_strcmp("BLUE", str) && !(color.g = 0) && !(color.r = 0) && !(color.a = 0))
 		color.b = 255;
-		color.g = 0;
-		color.r = 0;
+	if (!ft_strcmp("GREEN", str) && (color.b = 86) && (color.g = 155) && (color.r = 35))
 		color.a = 0;
-	}
-	if (ft_strcmp("GREEN", str) == 0)
-	{
-		color.b = 86;
-		color.g = 155;
-		color.r = 35;
+	if (!ft_strcmp("GRAY", str) && (color.b = 184) && (color.g = 183) && (color.r = 170))
 		color.a = 0;
-	}
-	if (ft_strcmp("GRAY", str) == 0)
-	{
-		color.b = 184;
-		color.g = 183;
-		color.r = 170;
-		color.a = 0;
-	}
 	return (color);
 }
 
@@ -116,3 +96,4 @@ void		put_column(t_variables **data, int x, double size, t_color color)
 		count++;
 	}
 }
+
